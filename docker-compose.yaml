@@ -1,0 +1,12 @@
+version: "3.7"
+
+services:
+  api:
+    build:
+      context: .
+    container_name: explorstate-api
+    working_dir: "/go/src/app"
+    volumes:
+      - .:/go/src/app
+    ports:
+      - 3001:3001
