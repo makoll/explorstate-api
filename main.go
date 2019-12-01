@@ -1,11 +1,13 @@
 package main
 
 import (
+    "exprorstate-api/article"
+
     "github.com/gin-gonic/gin"
 )
 
 func main() {
-    article := New()
+    article := article.New()
     r := gin.Default()
     r.GET("/article", ArticlesGet(article))
     r.POST("/article", ArticlePost(article))

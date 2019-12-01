@@ -1,4 +1,4 @@
-package main
+package article
 
 type Item struct {
     Title       string `json:"title"`

@@ -3,10 +3,12 @@ package main
 import (
     "net/http"
 
+    "exprorstate-api/article"
+
     "github.com/gin-gonic/gin"
 )
 
-func ArticlesGet(articles *Articles) gin.HandlerFunc {
+func ArticlesGet(articles *article.Articles) gin.HandlerFunc {
     return func(c *gin.Context) {
         result := articles.GetAll()
         c.JSON(http.StatusOK, result)
@@ -18,12 +20,12 @@ type ArticlePostRequest struct {
     Description string `json:"description"`
 }
 
-func ArticlePost(post *Articles) gin.HandlerFunc {
+func ArticlePost(post *article.Articles) gin.HandlerFunc {
     return func(c *gin.Context) {
         requestBody := ArticlePostRequest{}
         c.Bind(&requestBody)
 
-        item := Item{
+        item := article.Item{
             Title:       requestBody.Title,
             Description: requestBody.Description,
         }
