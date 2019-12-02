@@ -1,17 +1,9 @@
 package main
 
 import (
-    "exprorstate-api/article"
-
-    "github.com/gin-gonic/gin"
+    "exprorstate-api/httpd"
 )
 
 func main() {
-    article := article.New()
-    r := gin.Default()
-    r.GET("/article", ArticlesGet(article))
-    r.POST("/article", ArticlePost(article))
-
-    r.Run() // listen and serve on 0.0.0.0:8080
-
+    httpd.Exec()
 }
