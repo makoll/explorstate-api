@@ -1,2 +1,5 @@
+/mysql/data
+/mysql/log
+
 gin-bin
 vendor/*

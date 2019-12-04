@@ -8,6 +8,5 @@ WORKDIR /go/src/app
 
 RUN apk update && \
     apk add --no-cache git && \
-    go mod init exprorstate-api && \
     go get -u github.com/codegangsta/gin
 CMD gin -i run

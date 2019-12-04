@@ -10,3 +10,21 @@ services:
       - .:/go/src/app
     ports:
       - 3001:3001
+    depends_on:
+      - db
+
+  db:
+    image: mysql:8
+    container_name: explorstate-api_db
+    environment:
+      MYSQL_ROOT_PASSWORD: "root"
+      MYSQL_USER: "admin"
+      MYSQL_PASSWORD: "adminpass1"
+    volumes:
+      - ./mysql/conf.d:/etc/mysql/conf.d
+      - ./mysql/data:/var/lib/mysql
+      - ./mysql/tmp/data:/tmp/data
+      - ./mysql/log:/var/log/mysql
+    command: mysqld --character-set-server=utf8mb4 --collation-server=utf8mb4_unicode_ci
+    ports:
+      - "23306:3306"
