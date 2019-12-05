@@ -10,6 +10,7 @@ import (
 func Exec() {
     article := article.New()
     r := gin.Default()
+    r.GET("/db", handler.DbGet())
     r.GET("/article", handler.ArticlesGet(article))
     r.POST("/article", handler.ArticlePost(article))
 
