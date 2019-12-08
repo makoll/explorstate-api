@@ -1,9 +1,12 @@
 package main
 
 import (
-    "exprorstate-api/httpd"
+    "exprorstate-api/db"
+    "exprorstate-api/server"
 )
 
 func main() {
-    httpd.Exec()
+    db.Init()
+    server.Init()
+    db.Close()
 }

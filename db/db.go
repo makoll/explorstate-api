@@ -1,32 +1,46 @@
 package db
 
 import (
-    "database/sql"
     "fmt"
     "os"
     "strings"
 
-    _ "github.com/go-sql-driver/mysql"
+    "github.com/jinzhu/gorm"
+    _ "github.com/jinzhu/gorm/dialects/mysql"
+
+    "exprorstate-api/entity"
 )
 
-func GetName() string {
-    db := getDb()
-    defer db.Close()
-    var last_name string
-    err := db.QueryRow("SELECT last_name FROM user").Scan(&last_name)
+var (
+    db  *gorm.DB
+    err error
+)
+
+// Init is initialize db from main function
+func Init() {
+    connectionString := getConnectionString()
+    db, err = gorm.Open("mysql", connectionString)
     if err != nil {
-        fmt.Println(23, err)
+        panic(err)
     }
-    return last_name
+
+    autoMigration()
 }
 
-func getDb() *sql.DB {
-    connectionString := getConnectionString()
-    db, err := sql.Open("mysql", connectionString)
-    if err != nil {
-        fmt.Println(16, err)
-    }
+// GetDB is called in models
+func GetDB() *gorm.DB {
     return db
+}
+
+// Close is closing db
+func Close() {
+    if err := db.Close(); err != nil {
+        panic(err)
+    }
+}
+
+func autoMigration() {
+    db.AutoMigrate(&entity.User{})
 }
 
 func getParamString(param string, defaultValue string) string {
