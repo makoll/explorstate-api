@@ -4,7 +4,7 @@ import (
     "github.com/gin-gonic/gin"
 
     "exprorstate-api/db"
-    "exprorstate-api/entity"
+    "exprorstate-api/entity/user"
 )
 
 // Service procides user's behavior

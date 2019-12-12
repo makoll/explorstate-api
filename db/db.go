@@ -8,7 +8,8 @@ import (
     "github.com/jinzhu/gorm"
     _ "github.com/jinzhu/gorm/dialects/mysql"
 
-    "exprorstate-api/entity"
+    user "exprorstate-api/entity/user"
+    visit "exprorstate-api/entity/visit"
 )
 
 var (
@@ -40,7 +41,8 @@ func Close() {
 }
 
 func autoMigration() {
-    db.AutoMigrate(&entity.User{})
+    db.AutoMigrate(&user.User{})
+    db.AutoMigrate(&visit.Visit{})
 }
 
 func getParamString(param string, defaultValue string) string {
