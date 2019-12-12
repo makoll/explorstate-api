@@ -19,7 +19,7 @@ var (
 
 // Init is initialize db from main function
 func Init() {
-    connectionString := getConnectionString()
+    connectionString := getConnectionString("user")
     db, err = gorm.Open("mysql", connectionString)
     if err != nil {
         panic(err)
@@ -53,12 +53,11 @@ func getParamString(param string, defaultValue string) string {
     return defaultValue
 }
 
-func getConnectionString() string {
+func getConnectionString(dbname string) string {
     host := getParamString("MYSQL_DB_HOST", "db")
     port := getParamString("MYSQL_PORT", "3306")
     user := getParamString("MYSQL_USER", "admin")
-    pass := getParamString("MYSQL_PASSWORD", "adminpass1")
-    dbname := getParamString("MYSQL_DB", "user")
+    pass := getParamString("MYSQL_PASSWORD", "")
     protocol := getParamString("MYSQL_PROTOCOL", "tcp")
     dbargs := getParamString("MYSQL_DBARGS", " ")
 
